@@ -1,0 +1,15 @@
+/*Hoja de estilos del componente LeftArrow.css*/
+
+.circle-arrow{
+    width: 50px;
+    height: 50px;
+    background-color: #139fd4;
+    border-radius: 100px;
+    margin-top: 30px;
+}
+.arrow-left{
+    color: white;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-left: 10px;
+}

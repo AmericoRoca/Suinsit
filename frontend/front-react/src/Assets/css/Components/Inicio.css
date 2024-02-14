@@ -1,0 +1,35 @@
+/*Hoja de estilos del componente Inicio.css*/
+
+.container-fluid {
+    width: 100%;
+    height: 100%;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.icon-house,
+.icon-search {
+    color: white;
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.icon-search {
+    display: inline-block;
+}
+a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+}
+
+.inicio-inicio {
+    display: inline;
+    font-size: 30px;
+    margin-right: 15px;
+}
+
+.buscar-inicio {
+    vertical-align: center;
+    font-size: 30px;
+}

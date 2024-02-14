@@ -1,0 +1,81 @@
+.button-crud{
+    border-radius: 10px;
+    margin-right: 10px;
+}
+
+.icon-crud{
+    font-size: 20px;
+    color: white;
+}
+.cuadro-form{
+    margin-top: 20px;
+    border: 5px solid #266787;
+    width: 850px;
+    height: 145px;
+}
+.form-control{
+    width: 20%;
+    margin-bottom: 10px;
+}
+.cuadro-contrato{
+    margin-top: 20px;
+    border: 5px solid #139FD4;
+    width: 95%;
+    background-color: white;
+    height: 100px;
+    border-radius: 50px;
+    overflow: hidden;
+    margin-left: 20px;
+}
+.cuadro-li-back{
+    background-color: #266787;
+    border-radius: 50px;
+    text-align: center;
+}
+.cuadro-li{
+    display: inline;
+    margin-right: 130px;
+    margin-left: 20px;
+    color: white;
+}
+
+.cuadro-li-back2{
+    background-color: white;
+    border-radius: 50px;
+    text-align: center;
+}
+.cuadro-li2{
+    display: inline;
+    margin-right: 100px;
+    margin-left: 10px;
+    color: #266787;
+}
+/*Despligue del menu*/
+.fade-in {
+    animation: fadeIn ease 0.8s; /* Ajusta la duración de la animación aquí */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+
+/* Agrega el efecto de temblor */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    10%, 90% { transform: translateX(-10px); }
+    20%, 80% { transform: translateX(10px); }
+    30%, 50%, 70% { transform: translateX(-10px); }
+    40%, 60% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
+}
+
+/* Aplica el efecto de temblor a los elementos de la lista */
+.shake {
+    animation: shake 0.6s ease;
+}
