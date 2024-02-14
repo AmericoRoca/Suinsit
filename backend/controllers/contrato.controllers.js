@@ -1,11 +1,4 @@
-const { Pool } = require('pg');
-
-const pool = new Pool({
-    host: "localhost",
-    user: "postgres",
-    password: "29101991Am",
-    database: "bd_contrato"
-});
+const pool = require('../database/connect');
 
 const getContratos = async (req, res) => {
     try {
@@ -29,10 +22,9 @@ const getContratosById = async (req, res) => {
 }
 
 const createContratos = async (req, res) => {
-    const { numero, empresa } = req.body;
-
+    const { contrato, fecha, empresa, tipo } = req.body;
     try {
-        const response = await pool.query('INSERT INTO public.contrato (numero, empresa) VALUES ($1, $2) RETURNING *', [numero, empresa]);
+        const response = await pool.query('INSERT INTO public.contrato (codigo, contrato, fecha, empresa, tipo) VALUES (DEFAULT, $1, $2, $3, $4) RETURNING *', [contrato, fecha, empresa, tipo]);
         res.status(201).json(response.rows[0]);
     } catch (error) {
         console.error(error);
@@ -40,9 +32,9 @@ const createContratos = async (req, res) => {
     }
 }
 
-const updateContratos = async (req,res) => {
-    const id =req.params.id;
-    const { numero, empresa} = req.body;
+const updateContratos = async (req, res) => {
+    const id = req.params.id;
+    const { numero, empresa } = req.body;
 
     console.log(id, numero, empresa);
 
@@ -57,7 +49,7 @@ const updateContratos = async (req,res) => {
 
 
 const deleteContratos = async (req, res) => {
-    const id =req.params.id;
+    const id = req.params.id;
 
     try {
         const response = await pool.query('DELETE FROM public.contrato WHERE codigo = $1', [id]);

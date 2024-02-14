@@ -1,0 +1,16 @@
+/*Hoja de estilos del componente RightArrow.css*/
+
+.circle-arrow{
+    width: 50px;
+    height: 50px;
+    background-color: #139fd4;
+    border-radius: 100px;
+    display: inline-block;
+    margin-left: 10px;
+}
+.arrow-right{
+    color: white;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-left: 10px;
+}
