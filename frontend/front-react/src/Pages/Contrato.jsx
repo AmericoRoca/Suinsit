@@ -18,6 +18,7 @@ export const Contrato = () => {
   const [error, setError] = useState(null);
   const [eliminar, setEliminar] = useState(false);
   const [editar, setEditar] = useState(false);
+  const [editandoContrato, setEditandoContrato] = useState(null);
 
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -31,7 +32,7 @@ export const Contrato = () => {
   }, []);
 
 
-  //Llamada al API para mostrar los datos por pantalla
+  //METODO MUESTRA DE DATOS
   const fetchData = async () => {
 
     try {
@@ -57,9 +58,8 @@ export const Contrato = () => {
   };
 
 
-  //Llamada al API, para guardar los datos
+  //METODO PARA GUARDAR DATOS
   const guardarDatos = async (e) => {
-    //e.preventDefault();
 
     try {
       // Formatear la fecha antes de enviarla al backend
@@ -79,8 +79,7 @@ export const Contrato = () => {
         throw new Error('Error al guardar los datos');
       }
 
-      fetchData(); // Actualizar los datos después de guardarlos
-      //document.getElementById("miFormulario").reset();
+      fetchData(); 
 
     } catch (error) {
       console.error('Error al guardar los datos:', error);
@@ -88,7 +87,7 @@ export const Contrato = () => {
     }
   };
 
-  //Metodo para eliminacion de elementos
+  //METODO ELIMINACION DE DATOS
   const deleteContrato = async (id) => {
 
     console.log(id);
@@ -109,6 +108,41 @@ export const Contrato = () => {
     }
   };
 
+ // Método para guardar los cambios al editar
+const guardarCambios = async () => {
+  try {
+    const response = await fetch(`http://localhost:3001/contratos/${editandoContrato.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(editandoContrato)
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al actualizar el contrato');
+    }
+
+    // Actualiza la lista de contratos después de actualizar el contrato
+    fetchData();
+
+    // Desactiva el modo de edición
+    setEditandoContrato(null);
+  } catch (error) {
+    console.error('Error al actualizar el contrato:', error);
+    setError('Error al actualizar el contrato. Por favor, inténtelo de nuevo más tarde.');
+  }
+};
+
+// Método para manejar cambios en los campos editables
+const manejarCambio = (e) => {
+  const { name, value } = e.target;
+  setEditandoContrato(prevState => ({
+    ...prevState,
+    [name]: value
+  }));
+};
+
 
   //Función para mostrar u ocultar el panel de añadido, editado y eliminado
   const toggleAñadir = () => {
@@ -124,6 +158,10 @@ export const Contrato = () => {
     setEditar(!editar);
   };
   //Fin de toggles
+
+  const activarEdicion = (contrato) => {
+    setEditandoContrato(contrato);
+  };
 
 
   return (
