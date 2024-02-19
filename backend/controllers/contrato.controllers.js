@@ -13,7 +13,7 @@ const getContratos = async (req, res) => {
 const getContratosById = async (req, res) => {
     const id = req.params.id;
     try {
-        const response = await pool.query('SELECT * FROM public.contrato WHERE codigo = $1', [id]);
+        const response = await pool.query('SELECT * FROM public.contrato WHERE id = $1', [id]);
         res.status(200).json(response.rows);
     } catch (error) {
         console.error(error);
@@ -24,7 +24,7 @@ const getContratosById = async (req, res) => {
 const createContratos = async (req, res) => {
     const { contrato, fecha, empresa, tipo } = req.body;
     try {
-        const response = await pool.query('INSERT INTO public.contrato (codigo, contrato, fecha, empresa, tipo) VALUES (DEFAULT, $1, $2, $3, $4) RETURNING *', [contrato, fecha, empresa, tipo]);
+        const response = await pool.query('INSERT INTO public.contrato (id,  fecha, empresa, tipo) VALUES (DEFAULT, $1, $2, $3) RETURNING *', [ fecha, empresa, tipo]);
         res.status(201).json(response.rows[0]);
     } catch (error) {
         console.error(error);
@@ -52,8 +52,9 @@ const deleteContratos = async (req, res) => {
     const id = req.params.id;
 
     try {
-        const response = await pool.query('DELETE FROM public.contrato WHERE codigo = $1', [id]);
+        const response = await pool.query('DELETE FROM public.contrato WHERE id = $1', [id]);
         res.status(201).json(response.rows[0]);
+
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error al borrar el contrato' });

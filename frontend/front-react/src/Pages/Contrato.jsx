@@ -16,6 +16,8 @@ export const Contrato = () => {
   const [empresa, setEmpresa] = useState('');
   const [tipo, setTipo] = useState('');
   const [error, setError] = useState(null);
+  const [eliminar, setEliminar] = useState(false);
+  const [editar, setEditar] = useState(false);
 
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -46,7 +48,7 @@ export const Contrato = () => {
       }));
 
       setData(dataFormateada);
-      
+
     } catch (error) {
       console.error('Error al obtener los datos:', error);
       setError('Error al obtener los datos. Por favor, inténtelo de nuevo más tarde.');
@@ -69,8 +71,8 @@ export const Contrato = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ contrato, fecha: fechaFormateada, empresa, tipo })
- 
+        body: JSON.stringify({ fecha: fechaFormateada, empresa, tipo })
+
       });
 
       if (!response.ok) {
@@ -86,12 +88,42 @@ export const Contrato = () => {
     }
   };
 
+  //Metodo para eliminacion de elementos
+  const deleteContrato = async (id) => {
+
+    console.log(id);
+    try {
+      const response = await fetch(`http://localhost:3001/contratos/${id}`, {
+        method: 'DELETE'
+      });
+
+      if (!response.ok) {
+        throw new Error('Error al borrar el contrato');
+      }
+
+      // Actualiza la lista de contratos después de eliminar el contrato
+      fetchData();
+    } catch (error) {
+      console.error('Error al borrar el contrato:', error);
+      setError('Error al borrar el contrato. Por favor, inténtelo de nuevo más tarde.');
+    }
+  };
+
 
   //Función para mostrar u ocultar el panel de añadido, editado y eliminado
   const toggleAñadir = () => {
     setAñadir(!añadir);
-    console.log("Funcionando:" + añadir)
   };
+
+
+  const toggleEliminar = () => {
+    setEliminar(!eliminar);
+  };
+
+  const toggleEditar = () => {
+    setEditar(!editar);
+  };
+  //Fin de toggles
 
 
   return (
@@ -106,21 +138,19 @@ export const Contrato = () => {
             <FontAwesomeIcon icon={faPlus} className='icon-crud' />
           </button>
           <button className='btn btn-warning button-crud'>
-            <FontAwesomeIcon icon={faPen} className='icon-crud' />
+            <FontAwesomeIcon icon={faPen} className='icon-crud' onClick={toggleEditar} />
           </button>
           <button className='btn btn-danger button-crud'>
-            <FontAwesomeIcon icon={faTrash} className='icon-crud' />
+            <FontAwesomeIcon icon={faTrash} className='icon-crud' onClick={toggleEliminar} />
           </button>
         </div>
+        {/*Fin crud*/}
 
         {/* Formulario de relleno de datos para añadir contratos */}
         {añadir && (
           <form className='cuadro-form'>
             <div className='form-añadir'>
               <br />
-              <div className="mb-3">
-                <input type="text" className="form-control" id="contrato" placeholder='Contrato *' required value={contrato} onChange={(e) => setContrato(e.target.value)} />
-              </div>
               <div className="mb-3">
                 <input type="date" className="form-control" id="fecha" required value={fecha} onChange={(e) => setFecha(e.target.value)} />
               </div>
@@ -143,19 +173,28 @@ export const Contrato = () => {
         {/*  Muestra los datos por pantalla */}
         {data && data.map((contrato, index) => (
           <div className='cuadro-contrato' key={index}>
-            <div className='row cuadro-li-back'>
+            < div className='row cuadro-li-back'>
               <ul>
                 <li className="list-group-item cuadro-li">Codigo</li>
-                <li className="list-group-item cuadro-li">Contrato</li>
                 <li className="list-group-item cuadro-li">Empresa</li>
                 <li className="list-group-item cuadro-li">Fecha</li>
                 <li className="list-group-item cuadro-li">Tipo</li>
+                {eliminar && (
+                  <button className='btn btn-danger button-crud' onClick={() => deleteContrato(contrato.id)}>
+                    <FontAwesomeIcon icon={faTrash} className='icon-crud' />
+                  </button>
+                )}
+                {editar && (
+                  <button className='btn btn-warning button-crud'>
+                    <FontAwesomeIcon icon={faPen} className='icon-crud' onClick={toggleEditar} />
+                  </button>
+                )}
               </ul>
             </div>
+
             <div className='row cuadro-li-back2'>
               <ul className='fila-dato'>
-                <li className="list-group-item cuadro-li2">{contrato.codigo}</li>
-                <li className="list-group-item cuadro-li2">{contrato.contrato}</li>
+                <li className="list-group-item cuadro-li2">{contrato.id}</li>
                 <li className="list-group-item cuadro-li2">{contrato.empresa}</li>
                 <li className="list-group-item cuadro-li2">{contrato.fechaFormateada}</li>
                 <li className="list-group-item cuadro-li2">{contrato.tipo}</li>
@@ -163,7 +202,7 @@ export const Contrato = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div >
       {/* Fin muestra datos por pantalla*/}
 
 
