@@ -1,88 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react';
 
-export const Login = () => {
+const Login = () => {
+    // Estado para controlar si el usuario está autenticado o no
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    // Función para manejar el envío del formulario de inicio de sesión
+    const handleLoginSubmit = (e) => {
+        e.preventDefault();
+        // Aquí puedes agregar la lógica para autenticar al usuario
+        // Si la autenticación es exitosa, establece isLoggedIn en true
+        setIsLoggedIn(true);
+    }
+
+    // Función para manejar el envío del formulario de registro
+    const handleSignupSubmit = (e) => {
+        e.preventDefault();
+        // Aquí puedes agregar la lógica para registrar al usuario
+        // Si el registro es exitoso, establece isLoggedIn en true
+        setIsLoggedIn(true);
+    }
+
     return (
-        <div>Login</div>
-        /*
         <div className="form">
-
-            <ul className="tab-group">
-                <li className="tab active"><a href="#signup">Sign Up</a></li>
-                <li className="tab"><a href="#login">Log In</a></li>
-            </ul>
-
-            <div className="tab-content">
-                <div id="signup">
-                    <h1>Sign Up for Free</h1>
-
-                    <form action="/" method="post">
-
-                        <div className="top-row">
-                            <div className="field-wrap">
-                                <label>
-                                    First Name<span classNameName="req">*</span>
-                                </label>
-                                <input type="text" required autocomplete="off" />
-                            </div>
-
-                            <div className="field-wrap">
-                                <label>
-                                    Last Name<span className="req">*</span>
-                                </label>
-                                <input type="text" required autocomplete="off" />
-                            </div>
-                        </div>
-
-                        <div className="field-wrap">
-                            <label>
-                                Email Address<span className="req">*</span>
-                            </label>
-                            <input type="email" required autocomplete="off" />
-                        </div>
-
-                        <div className="field-wrap">
-                            <label>
-                                Set A Password<span className="req">*</span>
-                            </label>
-                            <input type="password" required autocomplete="off" />
-                        </div>
-
-                        <button type="submit" className="button button-block" >Get Started</button>
-
-                    </form>
-
-            </div>
-
-            <div id="login">
-                <h1>Welcome Back!</h1>
-
-                <form action="/" method="post">
-
-                    <div className="field-wrap">
-                        <label>
-                            Email Address<span className="req">*</span>
-                        </label>
-                        <input type="email" required autocomplete="off" />
+            {/* Si el usuario está autenticado, mostrar el contenido de bienvenida */}
+            {isLoggedIn ? (
+                <div>
+                    <h1>Bienvenido de nuevo!</h1>
+                    {/* Aquí puedes agregar cualquier contenido adicional para usuarios autenticados */}
+                </div>
+            ) : (
+                // Si el usuario no está autenticado, mostrar los formularios de inicio de sesión y registro
+                <div className="tab-content">
+                    <div id="signup">
+                        <h1>Sign Up for Free</h1>
+                        <form onSubmit={handleSignupSubmit}>
+                            {/* Contenido del formulario de registro */}
+                        </form>
                     </div>
-
-                    <div className="field-wrap">
-                        <label>
-                            Password<span className="req">*</span>
-                        </label>
-                        <input type="password" required autocomplete="off" />
+                    <div id="login">
+                        <h1>Welcome Back!</h1>
+                        <form onSubmit={handleLoginSubmit}>
+                            {/* Contenido del formulario de inicio de sesión */}
+                        </form>
                     </div>
-
-                    <p className="forgot"><a href="#">Forgot Password?</a></p>
-
-                    <button className="button button-block" >Log In</button>
-
-                </form>
-
-            </div>
-        
-        </div >
-      
-        </div >
-        */
-  )
+                </div>
+            )}
+        </div>
+    );
 }
+
+export default Login;

@@ -1,0 +1,30 @@
+.cuadro-form{
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 50px;
+    width: 30%;
+    height: 500px;
+    margin-left: 50px;
+    margin-bottom: 50px;
+    border: 5px solid #266787;
+}
+
+.form-añadir{
+    height: 500px;
+}
+
+/*Despligue del menu*/
+.fade-in {
+    animation: fadeIn ease 0.8s;
+    /* Ajusta la duración de la animación aquí */
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

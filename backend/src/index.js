@@ -12,7 +12,7 @@ app.use(cors());
 
 //Routes
 app.use(require('../routes/contrato.routes.js'));
-app.use(require('../routes/expediente.routes.js'));
+app.use(require('../routes/user.routes.js'));
 
 app.listen(3001);
 console.log("Server on port 3001");

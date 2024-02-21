@@ -17,7 +17,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 /*Carga de elementos*/
 import { Studio } from './Pages/Studio';
-import { Login } from './Pages/Login';
+import Login from './Pages/Login';
 import { Marketing } from './Pages/Marketing';
 import Contrato from '../src/Pages/Contrato/Contrato';
 import { Register } from './Pages/Register';
@@ -31,6 +31,7 @@ import { Alm } from './Pages/Alm';
 import { Soporte } from './Pages/Soporte';
 import Buscar from './Pages/Buscar';
 import { Error } from './Pages/Error';
+import { Home } from './Pages/Home';
 
 /*Fin importacion de elementos*/
 
@@ -73,6 +74,7 @@ function App() {
                   <Route path='/atlas' element={<Atlas />} />
                   <Route path='/alm' element={<Alm />} />
                   <Route path='/soporte' element={<Soporte />} />
+                  <Route path='/' element={<Home />} />
                   <Route path='*' element={<Error />} />
                 </Routes>
               </div>

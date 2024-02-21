@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPen, faTrash, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
-import '../../Assets/css/Pages/Contrato.css';
+import '../../Assets/css/Pages/Contrato/Contrato.css';
 import Crud from '../../Componentes/Crud';
 import { FormularioContrato } from './FormularioContrato';
 import { fetchData, guardarDatos, deleteContrato } from '../../Services/ContratoService';
@@ -34,9 +34,10 @@ export const Contrato = () => {
     // Aquí puedes implementar la lógica para guardar los cambios
     setEditandoIndex(null); // Resetear el índice de edición
   };
+  
 
   return (
-    <>
+    <div className='container-fluid container-cuadro'>
       {/* Componente Crud para mostrar los botones de añadir, editar y eliminar */}
       <Crud
         toggleAñadir={() => setAñadir(!añadir)}
@@ -74,16 +75,16 @@ export const Contrato = () => {
               <li className="list-group-item cuadro-li">Fecha</li>
               <li className="list-group-item cuadro-li">Tipo</li>
               {eliminar && (
-                <button className='btn btn-danger button-crud' onClick={() => deleteContrato(contrato.id)}>
+                <button className='btn btn-danger button-crud-eliminar' onClick={() => deleteContrato(contrato.id)}>
                   <FontAwesomeIcon icon={faTrash} className='icon-crud' />
                 </button>
               )}
               {editar && (
                 <>
-                  <button className='btn btn-warning button-crud' onClick={() => handleEditar(index)}> {/* Llama a handleEditar con el índice */}
+                  <button className='btn btn-warning button-crud-eliminar' onClick={() => handleEditar(index)}> {/* Llama a handleEditar con el índice */}
                     <FontAwesomeIcon icon={faPen} className='icon-crud' />
                   </button>
-                  <button className='btn btn-primary button-crud'> {/* Llama a handleEditar con el índice */}
+                  <button className='btn btn-primary button-crud-eliminar'> {/* Llama a handleEditar con el índice */}
                     <FontAwesomeIcon icon={faFloppyDisk} className='icon-crud' />
                   </button>
                 </>
@@ -133,7 +134,7 @@ export const Contrato = () => {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 

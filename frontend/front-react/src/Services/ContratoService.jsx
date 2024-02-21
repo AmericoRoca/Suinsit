@@ -7,12 +7,20 @@ export const fetchDataFromAPI = async (url, options = {}) => {
   try {
     const response = await fetch(url, options);
     if (!response.ok) {
-      throw new Error('Error en la solicitud');
+      throw new Error(`Error en la solicitud: ${response.status} - ${response.statusText}`);
     }
     return response.json();
   } catch (error) {
-    console.error('Error en la solicitud:', error);
-    throw new Error('Error en la solicitud. Por favor, inténtelo de nuevo más tarde.');
+    if (error instanceof TypeError) {
+      console.error('Error de red:', error);
+      throw new Error('Error de red. Por favor, verifique su conexión a Internet.');
+    } else if (error instanceof SyntaxError) {
+      console.error('Error de análisis JSON:', error);
+      throw new Error('Error de análisis JSON. Por favor, verifique el formato de los datos recibidos.');
+    } else {
+      console.error('Error en la solicitud:', error);
+      throw new Error('Error en la solicitud. Por favor, inténtelo de nuevo más tarde.');
+    }
   }
 };
 
@@ -49,18 +57,23 @@ export const guardarDatos = async (fecha, empresa, tipo) => {
   }
 };
 
-// Función para eliminar un contrato
+// Función para eliminar un contrato en el cliente
 export const deleteContrato = async (id) => {
   try {
     const response = await fetchDataFromAPI(`${baseURL}/${id}`, { method: 'DELETE' });
     if (!response.ok) {
-      throw new Error('Error al eliminar el contrato');
+      // Si la respuesta no es exitosa, lanzar un error con el mensaje de error proporcionado por el servidor
+      const errorMessage = await response.json(); // Obtener el mensaje de error del cuerpo de la respuesta
+      throw new Error(errorMessage.error); // Lanzar un nuevo error con el mensaje de error
     }
-    return true;
+    // Si la eliminación fue exitosa, devolver la respuesta vacía
+    return null; // Devuelve la respuesta para manejarla en el componente
   } catch (error) {
-    throw error;
+    // Si se produce algún error durante la solicitud, lanzar un error con un mensaje genérico
+    throw new Error('Error al eliminar el contrato. Por favor, inténtelo de nuevo más tarde.');
   }
 };
+
 
 
 // Función para guardar los cambios al editar un contrato

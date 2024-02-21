@@ -47,13 +47,12 @@ const updateContratos = async (req, res) => {
     }
 }
 
-
 const deleteContratos = async (req, res) => {
     const id = req.params.id;
 
     try {
-        const response = await pool.query('DELETE FROM public.contrato WHERE id = $1', [id]);
-        res.status(201).json(response.rows[0]);
+        await pool.query('DELETE FROM public.contrato WHERE id = $1', [id]);
+        res.status(200).json({ message: 'Contrato eliminado correctamente' });
 
     } catch (error) {
         console.error(error);
