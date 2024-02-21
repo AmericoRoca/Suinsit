@@ -19,7 +19,7 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import { Studio } from './Pages/Studio';
 import { Login } from './Pages/Login';
 import { Marketing } from './Pages/Marketing';
-import Contrato from './Pages/Contrato';
+import Contrato from '../src/Pages/Contrato/Contrato';
 import { Register } from './Pages/Register';
 import { Ventas } from './Pages/Ventas';
 import { Crm } from './Pages/Crm';

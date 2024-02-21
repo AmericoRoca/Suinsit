@@ -9,7 +9,6 @@ export const Footer1 = () => {
                     <ul>
                         <li>Sobre nosotros</li>
                         <li>Empleo</li>
-                        <li>Suinsit</li>
                         <li>Ejemplo 1</li>
                         <li>Ejemplo 2</li>
                         <li>Ejemplo 3</li>
@@ -19,7 +18,6 @@ export const Footer1 = () => {
                     <ul>
                         <li>Sobre nosotros</li>
                         <li>Empleo</li>
-                        <li>Suinsit</li>
                         <li>Ejemplo 1</li>
                         <li>Ejemplo 2</li>
                         <li>Ejemplo 3</li>
@@ -29,7 +27,6 @@ export const Footer1 = () => {
                     <ul>
                         <li>Sobre nosotros</li>
                         <li>Empleo</li>
-                        <li>Suinsit</li>
                         <li>Ejemplo 1</li>
                         <li>Ejemplo 2</li>
                         <li>Ejemplo 3</li>
