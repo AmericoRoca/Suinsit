@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
-const db = require('../config/database');
+const sequelize = require('../database/connect');
 
-const Usuario = db.define('Usuario', {
+const Usuario = sequelize.define('Usuario', {
   // Define las columnas de la tabla Usuario
   id: {
     type: DataTypes.INTEGER,
@@ -27,7 +27,7 @@ const Usuario = db.define('Usuario', {
   }
 }, {
   // Opciones adicionales del modelo
-  tableName: 'usuarios', // Nombre de la tabla en la base de datos
+  tableName: 'usuario', // Nombre de la tabla en la base de datos
   timestamps: false // No agregar campos de createdAt y updatedAt
 });
 

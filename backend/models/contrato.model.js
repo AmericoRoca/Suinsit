@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
-const db = require('../config/database');
+const sequelize = require('../config/database');
 
-const Contrato = db.define('Contrato', {
+const Contrato = sequelize.define('Contrato', {
   // Define las columnas de la tabla Contrato
   id: {
     type: DataTypes.INTEGER,

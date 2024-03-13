@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPen, faTrash, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 import '../../Assets/css/Pages/Contrato/Contrato.css';
-import Crud from '../../Componentes/Crud';
+import Crud from '../../Componentes/layout/general/Crud';
 import { FormularioContrato } from './FormularioContrato';
 import { fetchData, guardarDatos, deleteContrato } from '../../Services/ContratoService';
 

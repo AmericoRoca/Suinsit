@@ -1,10 +1,11 @@
-const { Pool } = require('pg');
+const { Sequelize } = require('sequelize');
 
-const pool = new Pool({
-  host: "localhost",
-  user: "postgres",
-  password: "29101991Am", //Contraseña predeterminada, hay que cambiarla en Postgres para que no cambie con cada pull
-  database: "postgres"
+const sequelize = new Sequelize({
+  dialect: 'postgres',
+  host: 'localhost',
+  username: 'postgres',
+  password: '29101991Am',
+  database: 'postgres'
 });
 
-module.exports = pool;
+module.exports = sequelize;
