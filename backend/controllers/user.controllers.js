@@ -2,11 +2,13 @@ const pool = require('../database/connect');
 const User = require('../models/user.model');
 const bcrypt = require("bcrypt");
 
+const jwt = require('../services/jwt')
+
 const UserController = {
   async getAllUsers(req, res) {
     try {
-      const users = await pool.query('SELECT * FROM usuario');
-      res.json(users.rows);
+      const users = await User.findAll();
+      res.json(users);
     } catch (error) {
       console.error(error.message);
       res.status(500).send('Error del servidor');
@@ -26,7 +28,7 @@ const UserController = {
 
   async register(req, res) {
     const { nombre, apellido, email, password } = req.body;
-  
+
     // Verificar si se proporcionaron todos los datos necesarios
     if (!nombre || !apellido || !email || !password) {
       console.log('Faltan datos por enviar');
@@ -35,7 +37,7 @@ const UserController = {
         message: "Faltan datos por enviar",
       });
     }
-  
+
     try {
       // Verificar si ya existe un usuario con el mismo correo electrónico
       const existingUser = await User.findOne({ where: { email: email } });
@@ -46,10 +48,10 @@ const UserController = {
           message: "El correo electrónico ya está registrado",
         });
       }
-  
+
       // Hash de la contraseña antes de guardarla en la base de datos
       const hashedPassword = await bcrypt.hash(password, 10);
-  
+
       // Crear el nuevo usuario en la base de datos
       const newUser = await User.create({
         nombre: nombre,
@@ -57,7 +59,7 @@ const UserController = {
         email: email,
         password: hashedPassword,
       });
-  
+
       // Devolver la respuesta al cliente
       res.status(201).json({
         status: "success",
@@ -105,26 +107,42 @@ const UserController = {
 
     try {
       // Consultar la base de datos para encontrar el usuario con el correo electrónico proporcionado
-      const user = await pool.query('SELECT * FROM usuario WHERE email = $1', [email]);
+      const user = await User.findOne({
+        where: {
+          email: email
+        }
+      });
 
       // Verificar si se encontró un usuario con el correo electrónico proporcionado
-      if (user.rows.length === 0) {
+      if (!user) {
         // Si no se encuentra el usuario, devolver un mensaje de error
         return res.status(400).json({ message: 'Correo electrónico no registrado' });
       }
 
       // Verificar si la contraseña proporcionada coincide con la contraseña almacenada en la base de datos
-      if (password !== user.rows[0].password) {
+      const passwordMatch = await bcrypt.compare(password, user.password);
+      if (!passwordMatch) {
         // Si las contraseñas no coinciden, devolver un mensaje de error
         return res.status(400).json({ message: 'Contraseña incorrecta' });
       }
 
-      // Si el correo electrónico y la contraseña son válidos, devolver los datos del usuario
-      res.json(user.rows[0]);
+      // Si el correo electrónico y la contraseña son válidos, generar el token JWT
+      const token = jwt.createToken(user);
+
+      // Devolver los datos del usuario junto con el token JWT
+      res.status(200).json({
+        status: "Success",
+        message: "Te has identificado correctamente",
+        user: {
+          id: user.id,
+          nombre: user.nombre,
+        },
+        token: token
+      });
     } catch (error) {
-      console.error(error.message);
+      console.error('Error al buscar usuario:', error);
       // Si ocurre un error en la consulta, devolver un mensaje de error del servidor
-      res.status(500).send('Error del servidor');
+      res.status(500).json({ message: 'Error del servidor' });
     }
   }
 
