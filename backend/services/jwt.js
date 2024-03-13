@@ -14,7 +14,7 @@ const createToken = (user) =>{
         email: user.email,
         password: user.password,
         iat: moment().unix(),
-        exp: moment().add(30, "days").unix
+        exp: moment().add(30, "days").unix()
     }
 
     //Devolver jwt

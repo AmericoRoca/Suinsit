@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const UserController = require('../controllers/user.controllers');
+const check = require("../middleware/auth")
 
 // Rutas para operaciones CRUD de usuarios
 router.get('/user', UserController.getAllUsers);
