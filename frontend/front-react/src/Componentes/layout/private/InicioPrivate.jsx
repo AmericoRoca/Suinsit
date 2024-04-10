@@ -10,6 +10,8 @@ import '../../../Assets/css/Components/layout/private/InicioPrivate.css'
 
 const InicioPrivate = () => {
 
+
+
   return (
     <>
         <div className="container-fluid">

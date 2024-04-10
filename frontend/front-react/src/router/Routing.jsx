@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, BrowserRouter, Navigate, Routes } from 'react-router-dom';
+import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import InicioPublic from '../Componentes/layout/public/InicioPublic'
 import Login from '../Componentes/User/Login'
 import Register from '../Componentes/User/Register';
@@ -17,9 +17,9 @@ import { Atlas } from '../Pages/Atlas';
 import { Alm } from '../Pages/Alm';
 import { Soporte } from '../Pages/Soporte';
 import { Error } from '../Pages/Error';
-//import { AuthProvider } from '../context/AuthProvider';
-import InicioPrivate from '../Componentes/layout/private/InicioPrivate'
 import { AuthProvider } from '../context/AuthProvider';
+import InicioPrivate from '../Componentes/layout/private/InicioPrivate'
+
 
 export const Routing = () => {
     return (

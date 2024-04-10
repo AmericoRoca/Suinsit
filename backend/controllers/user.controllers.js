@@ -25,7 +25,9 @@ const UserController = {
 },
 
 async getUserById(req, res)  {
+
   const { id } = req.params;
+  
   try {
     const user = await User.findByPk(id); 
     if (user) {
@@ -150,6 +152,8 @@ async getUserById(req, res)  {
       user: {
         id: user.id,
         nombre: user.nombre,
+        apellido: user.apellido,
+        email: user.email
       },
       token: token
     });
