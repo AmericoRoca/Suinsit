@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faPen, faTrash, faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
 import '../../Assets/css/Pages/Contrato/Contrato.css';
-import Crud from '../../Componentes/layout/general/Crud';
+import Crud from '../../Componentes/layout/private/Crud';
 import { FormularioContrato } from './FormularioContrato';
 import { fetchData, guardarDatos, deleteContrato } from '../../Services/ContratoService';
 
@@ -15,30 +15,24 @@ export const Contrato = () => {
   const [error, setError] = useState(null);
   const [eliminar, setEliminar] = useState(false);
   const [editar, setEditar] = useState(false);
-  const [editandoIndex, setEditandoIndex] = useState(null); // Estado para almacenar el índice del contrato que se está editando
+  const [editandoIndex, setEditandoIndex] = useState(null);
 
-  // Llamada a fetchData en useEffect para obtener los datos iniciales
   useEffect(() => {
     fetchData()
       .then(data => setData(data))
       .catch(error => setError(error));
   }, []);
 
-  // Función para manejar el evento de clic en el botón de editar
   const handleEditar = (index) => {
-    setEditandoIndex(index); // Establecer el índice del contrato que se está editando
+    setEditandoIndex(index);
   };
 
-  // Función para manejar el evento de guardar los cambios
   const handleGuardarCambios = () => {
-    // Aquí puedes implementar la lógica para guardar los cambios
-    setEditandoIndex(null); // Resetear el índice de edición
+    setEditandoIndex(null);
   };
-  
 
   return (
     <div className='container-fluid container-cuadro'>
-      {/* Componente Crud para mostrar los botones de añadir, editar y eliminar */}
       <Crud
         toggleAñadir={() => setAñadir(!añadir)}
         toggleEditar={() => setEditar(!editar)}
@@ -49,7 +43,6 @@ export const Contrato = () => {
         title="Contratos"
       />
 
-      {/* Componente FormularioContrato, se muestra si añadir es true */}
       {añadir && (
         <FormularioContrato
           fecha={fecha}
@@ -62,10 +55,8 @@ export const Contrato = () => {
         />
       )}
 
-      {/* Muestra un mensaje de error si hay un error */}
       {error && <div className="alert alert-danger">{error}</div>}
 
-      {/* Muestra los datos por pantalla */}
       {data && data.map((contrato, index) => (
         <div className='cuadro-contrato' key={index}>
           <div className='row cuadro-li-back'>
@@ -81,10 +72,10 @@ export const Contrato = () => {
               )}
               {editar && (
                 <>
-                  <button className='btn btn-warning button-crud-eliminar' onClick={() => handleEditar(index)}> {/* Llama a handleEditar con el índice */}
+                  <button className='btn btn-warning button-crud-eliminar' onClick={() => handleEditar(index)}>
                     <FontAwesomeIcon icon={faPen} className='icon-crud' />
                   </button>
-                  <button className='btn btn-primary button-crud-eliminar'> {/* Llama a handleEditar con el índice */}
+                  <button className='btn btn-primary button-crud-eliminar'>
                     <FontAwesomeIcon icon={faFloppyDisk} className='icon-crud' />
                   </button>
                 </>
@@ -94,7 +85,6 @@ export const Contrato = () => {
           <div className='row cuadro-li-back2'>
             <ul className='fila-dato'>
               <li className="list-group-item cuadro-li2">{contrato.id}</li>
-              {/* Verifica si este contrato está siendo editado */}
               {editandoIndex === index ? (
                 <li className="list-group-item cuadro-li2">
                   <input
@@ -106,7 +96,6 @@ export const Contrato = () => {
               ) : (
                 <li className="list-group-item cuadro-li2">{contrato.empresa}</li>
               )}
-              {/* Verifica si este contrato está siendo editado */}
               {editandoIndex === index ? (
                 <li className="list-group-item cuadro-li2">
                   <input
@@ -118,7 +107,6 @@ export const Contrato = () => {
               ) : (
                 <li className="list-group-item cuadro-li2">{contrato.fechaFormateada}</li>
               )}
-              {/* Verifica si este contrato está siendo editado */}
               {editandoIndex === index ? (
                 <li className="list-group-item cuadro-li2">
                   <input

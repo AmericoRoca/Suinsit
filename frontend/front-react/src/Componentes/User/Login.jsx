@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import '../../Assets/css/Components/User/Login.css'
+import '../../Assets/css/Components/layout/public/Login.css'
+import logo from '../../Assets/images/react (1).svg'
 
 const Login = () => {
+
     // Estado para controlar si el usuario está autenticado o no
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     // Estados para los campos del formulario
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [saved, setSaved] = useState('not_sended');
+
 
     // Manejar el cambio en el campo de email
     const handleEmailChange = (event) => {
@@ -20,11 +25,12 @@ const Login = () => {
 
     // Manejar el envío del formulario
     const handleSubmit = async (event) => {
+
         event.preventDefault();
 
         try {
             // Realizar la petición al API para guardar el usuario
-            const response = await fetch('http://localhost:3001/login', {
+            const request = await fetch('http://localhost:3001/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -35,10 +41,24 @@ const Login = () => {
                 })
             });
 
-            if (response.ok) {
+            const data = await request.json();
+
+            if (data.status == "Success") {
+                setSaved("login")
+
+                localStorage.setItem("token", data.token)
+                localStorage.setItem("user", JSON.stringify(data.user))
+
+            } else {
+                setSaved("Error")
+            }
+
+            if (request.ok) {
                 // Usuario guardado exitosamente
                 setIsLoggedIn(true);
+
                 // Aquí podrías redirigir al usuario a otra página o mostrar un mensaje de éxito
+                window.location.href = '/app/app/contrato';
             } else {
                 // Hubo un error al guardar el usuario
                 console.error('Error al guardar el usuario');
@@ -49,17 +69,34 @@ const Login = () => {
     }
 
     return (
+
+        <>
+            <div className='container-fluid '>
+                {saved == "login" ?
+                    <strong className='alert alert-success'>Acceso correcto</strong> : ''}
+
+
+                {saved == "error" ?
+                    <strong className='alert alert-danger'>Acceso incorrecto</strong> : ''}
+            </div>
+
             <div className='container-fluid login'>
                 <div className='form-login'>
+
+
+                    <div className='title'>
+                        <h1 className='title'>REACT</h1>
+                        <img src={logo} className="App-logo" alt="logo" />
+                    </div>
                     <div className='login-content'>
                         <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
                             <li className="nav-item" role="presentation">
-                                <a className="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
-                                    aria-controls="pills-login" aria-selected="true">Login</a>
+                                <a className="nav-link" id="tab-login" data-mdb-toggle="pill" href="/login" role="tab"
+                                    aria-selected="true">Login</a>
                             </li>
                             <li className="nav-item" role="presentation">
-                                <a className="nav-link" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
-                                    aria-controls="pills-register" aria-selected="false">Register</a>
+                                <a className="nav-link" id="tab-login" data-mdb-toggle="pill" href="/register" role="tab"
+                                    aria-selected="false">Register</a>
                             </li>
                         </ul>
 
@@ -74,14 +111,16 @@ const Login = () => {
                                 <form onSubmit={handleSubmit}>
                                     {/* Campo de email o username */}
                                     <div className="form-outline mb-4">
+                                        <label className="form-label" htmlFor="loginName">Email</label>
                                         <input type="email" id="loginName" className="form-control" value={email} onChange={handleEmailChange} />
-                                        <label className="form-label" htmlFor="loginName">Email or username</label>
+                                        
                                     </div>
 
                                     {/* Campo de contraseña */}
                                     <div className="form-outline mb-4">
-                                        <input type="password" id="loginPassword" className="form-control" value={password} onChange={handlePasswordChange} />
                                         <label className="form-label" htmlFor="loginPassword">Password</label>
+                                        <input type="password" id="loginPassword" className="form-control" value={password} onChange={handlePasswordChange} />
+                                       
                                     </div>
 
                                     {/* Opciones adicionales y botones */}
@@ -98,11 +137,11 @@ const Login = () => {
                                     </div>
 
                                     {/* Botón de inicio de sesión */}
-                                    <button type="submit" className="btn btn-primary btn-block mb-4">Sign in</button>
+                                    <button type="submit" className="btn btn-primary btn-block mb-4 boton-login">Sign in</button>
 
                                     {/* Enlace de registro */}
                                     <div className="text-center">
-                                        <p>Not a member? <a href="#!">Register</a></p>
+                                        <p>Not a member? <a href="/register">Register</a></p>
                                     </div>
                                 </form>
                             </div>
@@ -116,6 +155,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+        </>
     )
 }
 

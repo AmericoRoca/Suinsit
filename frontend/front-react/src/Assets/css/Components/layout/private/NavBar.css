@@ -1,5 +1,7 @@
 /*Hoja de estilos del componente NavBar.css*/
-
+.navigation{
+    margin-top: 10px;
+}
 .cuadro{
     margin-top: 30px;
     width: 150px;

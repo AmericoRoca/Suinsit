@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types'; // Importa PropTypes para validar las props
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Importa FontAwesomeIcon para los iconos
 import { faBook } from '@fortawesome/free-solid-svg-icons';
-import '../../../Assets/css/Components/Crud.css'; // Importa el archivo de estilos CSS
+import '../../../Assets/css/Components//layout/private/Crud.css'; // Importa el archivo de estilos CSS
 
 const Crud = ({ // Define el componente Crud como una función de flecha que recibe props
   title,

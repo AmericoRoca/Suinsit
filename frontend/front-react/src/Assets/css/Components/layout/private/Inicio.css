@@ -1,4 +1,8 @@
 /*Hoja de estilos del componente Inicio.css*/
+.inicio{
+    margin-top: 10px;
+}
+
 .container-fluid {
     width: 100%;
     height: 100%;

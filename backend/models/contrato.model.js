@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const sequelize = require('../database/connect');
+
 
 const Contrato = sequelize.define('Contrato', {
   // Define las columnas de la tabla Contrato
@@ -22,7 +23,7 @@ const Contrato = sequelize.define('Contrato', {
   }
 }, {
   // Opciones adicionales del modelo
-  tableName: 'contratos', // Nombre de la tabla en la base de datos
+  tableName: 'contrato', // Nombre de la tabla en la base de datos
   timestamps: false // No agregar campos de createdAt y updatedAt
 });
 

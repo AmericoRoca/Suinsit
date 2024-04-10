@@ -1,21 +1,28 @@
 import React, { useState } from 'react';
+import moment from 'moment'; // Importar moment.js para formatear la fecha
 
-export const FormularioContrato = ({
-    guardarDatos,
-}) => {
-    // Estados para los campos del formulario
+export const FormularioContrato = ({ guardarDatos }) => {
     const [fecha, setFecha] = useState('');
     const [empresa, setEmpresa] = useState('');
     const [tipo, setTipo] = useState('');
+    const [error, setError] = useState('');
 
-    // Función para manejar el envío del formulario
     const handleSubmit = (e) => {
-        e.preventDefault(); // Evita que la página se refresque al enviar el formulario
-        guardarDatos(fecha, empresa, tipo); // Llama a la función para guardar los datos
-        // Restablece los valores de los campos del formulario a una cadena vacía
+        e.preventDefault();
+
+        // Formatear la fecha antes de enviarla al servidor
+        const fechaFormateada = moment(fecha).format('YYYY-MM-DD');
+
+        if (!fechaFormateada || !empresa || !tipo) {
+            setError('Por favor, completa todos los campos.');
+            return;
+        }
+
+        guardarDatos(fechaFormateada, empresa, tipo);
         setFecha('');
         setEmpresa('');
         setTipo('');
+        setError('');
     };
 
     return (
@@ -34,6 +41,7 @@ export const FormularioContrato = ({
                 <div className="form col-md-12">
                     <button type="submit" className="btn btn-primary btn-submit-añadir">Submit</button>
                 </div>
+                {error && <div className="alert alert-danger">{error}</div>}
             </div>
         </form>
     );

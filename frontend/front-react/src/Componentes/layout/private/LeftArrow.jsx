@@ -1,5 +1,5 @@
 import React from 'react'
-import '../../../Assets/css/Components/LeftArrow.css';
+import '../../../Assets/css/Components/layout/private/LeftArrow.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 

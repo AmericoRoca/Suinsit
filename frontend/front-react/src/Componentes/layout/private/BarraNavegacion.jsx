@@ -1,7 +1,7 @@
 // Navbar.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../../../Assets/css/Components/NavBar.css';
+import '../../../Assets/css/Components/layout/private/NavBar.css';
 
 // Import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -23,52 +23,54 @@ export const BarraNavegacion = () => {
     };
 
     return (
-        <nav>
-            <ul className='container'>
-                <div className='row'>
-                    <div className='col-md-2'>
-                        <Cuadro to="/contrato" icon={faBook} text="Contrato" />
+        <section className='navigation'>
+            <nav>
+                <ul className='container'>
+                    <div className='row'>
+                        <div className='col-md-2'>
+                            <Cuadro to="app/contrato" icon={faBook} text="Contrato" />
+                        </div>
+                        <div className='col-md-2'>
+                            <Cuadro to="app/studio" icon={faBook} text="Studio" />
+                        </div>
+                        <div className='col-md-2'>
+                            <Cuadro to="app/ventas" icon={faMoneyBill} text="Ventas" />
+                        </div>
+                        <div className='col-md-2'>
+                            <Cuadro to="app/crm" icon={faBook} text="Crm" />
+                        </div>
+                        <div className='col-md-2'>
+                            <Cuadro to="app/marketing" icon={faBook} text="Marketing" />
+                        </div>
+                        <div className='col-md-2'>
+                            <Cuadro onClick={toggleItems} icon={showItems ? faArrowCircleUp : faArrowCircleDown} text={showItems ? "Mostrar Menos" : "Mostrar Más"} />
+                        </div>
+                        {showItems && (
+                            <>
+                                <div className='col-md-2'>
+                                    <Cuadro to="app/office" icon={faBriefcase} text="Office" />
+                                </div>
+                                <div className='col-md-2'>
+                                    <Cuadro to="app/procesos" icon={faMicrochip} text="Procesos" />
+                                </div>
+                                <div className='col-md-2'>
+                                    <Cuadro to="app/arquitectura" icon={faSitemap} text="Arquitectura" />
+                                </div>
+                                <div className='col-md-2'>
+                                    <Cuadro to="app/atlas" icon={faBookAtlas} text="Atlas" />
+                                </div>
+                                <div className='col-md-2'>
+                                    <Cuadro to="app/alm" icon={faBook} text="Alm" />
+                                </div>
+                                <div className='col-md-2'>
+                                    <Cuadro to="app/soporte" icon={faPhone} text="Soporte" />
+                                </div>
+                            </>
+                        )}
                     </div>
-                    <div className='col-md-2'>
-                        <Cuadro to="/studio" icon={faBook} text="Studio" />
-                    </div>
-                    <div className='col-md-2'>
-                        <Cuadro to="/ventas" icon={faMoneyBill} text="Ventas" />
-                    </div>
-                    <div className='col-md-2'>
-                        <Cuadro to="/crm" icon={faBook} text="Crm" />
-                    </div>
-                    <div className='col-md-2'>
-                        <Cuadro to="/marketing" icon={faBook} text="Marketing" />
-                    </div>
-                    <div className='col-md-2'>
-                        <Cuadro onClick={toggleItems} icon={showItems ? faArrowCircleUp : faArrowCircleDown} text={showItems ? "Mostrar Menos" : "Mostrar Más"} />
-                    </div>
-                    {showItems && (
-                        <>
-                            <div className='col-md-2'>
-                                <Cuadro to="/office" icon={faBriefcase} text="Office" />
-                            </div>
-                            <div className='col-md-2'>
-                                <Cuadro to="/procesos" icon={faMicrochip} text="Procesos" />
-                            </div>
-                            <div className='col-md-2'>
-                                <Cuadro to="/arquitectura" icon={faSitemap} text="Arquitectura" />
-                            </div>
-                            <div className='col-md-2'>
-                                <Cuadro to="/atlas" icon={faBookAtlas} text="Atlas" />
-                            </div>
-                            <div className='col-md-2'>
-                                <Cuadro to="/alm" icon={faBook} text="Alm" />
-                            </div>
-                            <div className='col-md-2'>
-                                <Cuadro to="/soporte" icon={faPhone} text="Soporte" />
-                            </div>
-                        </>
-                    )}
-                </div>
-            </ul>
-        </nav>
+                </ul>
+            </nav>
+        </section>
     );
 };
 

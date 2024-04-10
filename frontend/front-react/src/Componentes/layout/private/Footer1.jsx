@@ -1,8 +1,9 @@
 import React from 'react'
-import '../../../Assets/css/Components/Footer1.css';
+import '../../../Assets/css/Components/layout/private/Footer1.css';
 
-export const Footer1 = () => {
+const Footer1 = () => {
     return (
+        <section className='footer'>
         <div className='col-md-12 general footer1'>
             <div className='row'>
                 <div className='col-2'>
@@ -34,5 +35,8 @@ export const Footer1 = () => {
                 </div>
             </div>
         </div>
+        </section>
     )
 }
+
+export default Footer1;
