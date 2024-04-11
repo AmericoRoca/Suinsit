@@ -19,3 +19,8 @@
     color: white;
     text-decoration: none;
 }
+
+.boton-error{
+    margin-left: 30px;
+    text-align: center;
+}

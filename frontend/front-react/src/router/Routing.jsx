@@ -19,6 +19,7 @@ import { Soporte } from '../Pages/Soporte';
 import { Error } from '../Pages/Error';
 import { AuthProvider } from '../context/AuthProvider';
 import InicioPrivate from '../Componentes/layout/private/InicioPrivate'
+import { Logout } from '../Componentes/User/Logout';
 
 
 export const Routing = () => {
@@ -30,9 +31,11 @@ export const Routing = () => {
                     <Route path='/' element={<InicioPublic />} >
                         <Route path='/login' element={<Login />} />
                         <Route path='/register' element={<Register />} />
+                        <Route path='*' element={<Error />} />
                     </Route>
 
                     <Route path='/app' element={<InicioPrivate />} >
+                        <Route path='app/logout' element={<Logout />} />
                         <Route path='app/buscar' element={<Buscar />} />
                         <Route path='app/studio' element={<Studio />} />
                         <Route path='app/ventas' element={<Ventas />} />
@@ -44,8 +47,8 @@ export const Routing = () => {
                         <Route path='app/atlas' element={<Atlas />} />
                         <Route path='app/alm' element={<Alm />} />
                         <Route path='app/soporte' element={<Soporte />} />
-                        <Route path='*' element={<Error />} />
                         <Route path='app/contrato' element={<Contrato />} />
+                
                     </Route>
 
                 </Routes>

@@ -25,7 +25,9 @@ const getContratosById = async (req, res) => {
 }
 
 const createContratos = async (req, res) => {
+
     const { fecha, empresa, tipo } = req.body;
+    
     try {
         const contrato = await Contrato.create({ fecha, empresa, tipo });
         res.status(201).json(contrato);

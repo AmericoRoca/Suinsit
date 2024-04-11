@@ -30,10 +30,13 @@ export const fetchData = async () => {
   }
 };
 
-// Función para guardar un nuevo contrato
+// Función para guardar datos
 export const guardarDatos = async (fecha, empresa, tipo) => {
   try {
-    const fechaFormateada = moment(fecha).format('DD-MM-YYYY');
+    // Formatea la fecha utilizando moment.js
+    const fechaFormateada = moment(fecha).format('YYYY-MM-DD');
+
+    // Define las opciones para la solicitud POST
     const options = {
       method: 'POST',
       mode: 'cors',
@@ -42,12 +45,18 @@ export const guardarDatos = async (fecha, empresa, tipo) => {
       },
       body: JSON.stringify({ fecha: fechaFormateada, empresa, tipo })
     };
+
+    // Realiza la solicitud al API
     await fetchDataFromAPI(baseURL, options);
+
+    // Retorna true para indicar que la solicitud fue exitosa
     return true;
   } catch (error) {
+    // Captura y maneja cualquier error que ocurra durante la solicitud
     throw error;
   }
 };
+
 
 // Función para eliminar un contrato en el cliente
 export const deleteContrato = async (id) => {
@@ -57,11 +66,14 @@ export const deleteContrato = async (id) => {
       const errorMessage = await response.json();
       throw new Error(errorMessage.error);
     }
+    // No es necesario lanzar una excepción aquí si la eliminación fue exitosa
     return null;
   } catch (error) {
+    // Manejar cualquier error que ocurra durante la eliminación del contrato
     throw new Error('Error al eliminar el contrato. Por favor, inténtelo de nuevo más tarde.');
   }
 };
+
 
 // Función para guardar los cambios al editar un contrato
 export const guardarCambios = async (editandoContrato) => {

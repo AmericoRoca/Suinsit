@@ -16,8 +16,6 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem("token");
       const user = localStorage.getItem("user");
 
-      console.log("Token:", token);
-      console.log("User:", user);
 
       if (!token || !user) {
         console.log("Token o usuario no encontrados en el almacenamiento local");
@@ -27,7 +25,6 @@ export const AuthProvider = ({ children }) => {
       const userObj = JSON.parse(user);
       const userId = userObj.id;
 
-      console.log("ID de usuario:", userId);
 
       const request = await fetch(Global.url + "user/profile/" + userId, {
         method: "GET",
@@ -39,14 +36,13 @@ export const AuthProvider = ({ children }) => {
 
       const data = await request.json();
 
-      console.log("Datos recibidos de la API:", data);
+
 
       if (!data ) {
         console.log("Los datos del usuario no están definidos en la respuesta");
         return false;
       }
 
-      console.log("Datos del usuario:", data);
       setAuth(data);
 
     } catch (error) {

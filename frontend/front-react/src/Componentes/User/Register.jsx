@@ -54,7 +54,9 @@ const Register = () => {
             if (response.ok) {
                 // Usuario guardado exitosamente
                 setIsLoggedIn(true);
+
                 // Aquí podrías redirigir al usuario a otra página o mostrar un mensaje de éxito
+                window.location.href = '/app/app/contrato';
             } else {
                 // Hubo un error al guardar el usuario
                 console.error('Error al guardar el usuario');

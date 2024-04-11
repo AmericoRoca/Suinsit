@@ -3,16 +3,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faRightFromBracket, faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
 import '../../../Assets/css/Components/layout/private/Inicio.css';
 import useAuth from '../../../hooks/useAuth';
+import {  NavLink } from 'react-router-dom';
 
 export const Inicio = ({ routes }) => {
 
   const { auth } = useAuth();
 
   // Verificar si auth está definido y tiene la propiedad nombre
-  const nombreUsuario = auth && auth.nombre ? auth.nombre : '';  
-
-
-  console.log(auth.nombre)
+  const nombreUsuario = auth && auth.nombre ? auth.nombre : '';
 
   return (
     <section className='inicio'>
@@ -32,7 +30,9 @@ export const Inicio = ({ routes }) => {
         </div>
         <div className='cont'>
           <FontAwesomeIcon icon={faRightFromBracket} className='icon-house'></FontAwesomeIcon>
-          <a href='/login' className='buscar-inicio'>Cerrar sesion</a>
+          <NavLink to='app/logout' className='buscar-inicio'>
+            <span>Cerrar sesion</span>
+          </NavLink>
         </div>
       </div>
     </section>
