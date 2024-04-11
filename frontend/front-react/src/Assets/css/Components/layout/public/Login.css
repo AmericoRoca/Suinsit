@@ -9,32 +9,33 @@
 }
 
 .title {
-    color: white;
+    margin-top: 20px;
+    color: #000000;
     text-align: center;
+    margin-bottom: 20px;
 }
 
-@keyframes rotate {
-    from {
-        transform: rotate(0deg); /* Define la rotación inicial */
+@keyframes pulse {
+    0% {
+        transform: scale(1); /* Estado inicial */
     }
-    to {
-        transform: rotate(360deg); /* Define la rotación final */
+    50% {
+        transform: scale(1.2); /* Estado intermedio */
+    }
+    100% {
+        transform: scale(1); /* Estado final, igual que el inicial */
     }
 }
 
 .App-logo {
-    width: 30%;
-    animation: rotate 15s linear infinite;
+    width: 20%;
+    animation: pulse 3s linear infinite;
 }
 
 .form-login {
     border-radius: 50px;
     width: 550px;
-    background-color: #266787;
-}
-
-.form-login:hover{
-    background-color: #266787;
+    background-color:#FFD529;
 }
 
 .login-content {
@@ -43,17 +44,21 @@
 }
 
 .nav-item {
-    background-color: #139FD4;
-    border-radius: 10px;
+    background-color: #000000;
 }
 
 .nav-item:hover {
     background-color: white;
-    border-radius: 10px;
-    color: #266787;
+    color: black;
+    
 }
+
+.nav-item{
+    width: 50%;
+}
+
 #tab-login:hover {
-    color: #139FD4;
+    color: black;
 }
 
 #tab-login {
@@ -64,6 +69,7 @@
     display: flex;
     flex-direction: row; /* Mostrar elementos en línea horizontal */
     align-items: center; /* Centrar verticalmente */
+    text-align: center;
 }
 
 .form-label {
@@ -71,15 +77,30 @@
     margin-right: 10px; /* Ajustar el espaciado entre el label y el input */
 }
 
+/* Estilo para el checkbox */
+#loginCheck {
+    /* Cambia el color del borde del checkbox a negro */
+    border-color: #000;
+  }
+  
+  /* Estilo para el indicador visual del checkbox */
+  #loginCheck:checked::before {
+    /* Cambia el color del indicador cuando está marcado a negro */
+    background-color: #000;
+    /* Cambia el color del indicador cuando está marcado a blanco */
+    border-color: #000;
+  }
+
 .boton-login {
     margin-top: 20px; /* Ajustar el margen superior del botón */
     text-align: center;
-    background-color: #139FD4;
-    border: #139FD4;
+    background-color: #000000;
+    border: #000000;
+
 }
 
 .boton-login:hover {
     background-color: white;
-    color: #266787;
+    color: black;
 
 }

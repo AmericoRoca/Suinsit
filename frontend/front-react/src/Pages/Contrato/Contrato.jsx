@@ -79,6 +79,9 @@ export const Contrato = () => {
 
 
   return (
+    <>
+    {/* CRUD */} 
+
     <div className='container-fluid container-cuadro'>
       <Crud
         toggleAñadir={() => setAñadir(!añadir)}
@@ -182,6 +185,7 @@ export const Contrato = () => {
         </div>
       ))}
     </div>
+    </>
   );
 };
 

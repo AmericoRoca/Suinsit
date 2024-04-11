@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../../Assets/css/Components/layout/public/Login.css'
-import logo from '../../Assets/images/react (1).svg'
+import logo from '../../Assets/images/kampaoh.png'
 
 const Register = () => {
     // Estado para controlar si el usuario está autenticado o no
@@ -70,16 +70,16 @@ const Register = () => {
         <div className='container-fluid login'>
             <div className='form-login'>
                 <div className='title'>
-                    <h1 className='title'>REACT</h1>
+                    <h1 className='title'>Kampaoh App</h1>
                     <img src={logo} className="App-logo" alt="logo" />
                 </div>
                 <div className='login-content'>
                     <ul className="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-                        <li className="nav-item" role="presentation">
+                        <li className="nav-item nav-item1" role="presentation">
                             <a className="nav-link" id="tab-login" data-mdb-toggle="pill" href="/login" role="tab"
                                 aria-controls="pills-login">Login</a>
                         </li>
-                        <li className="nav-item" role="presentation">
+                        <li className="nav-item nav-item2" role="presentation">
                             <a className="nav-link" id="tab-login" data-mdb-toggle="pill" href="/register" role="tab"
                                 aria-controls="pills-register" >Register</a>
                         </li>
@@ -97,29 +97,28 @@ const Register = () => {
 
                                 {/* Campo de apellido */}
                                 <div className="form-outline mb-4">
-                                    <label className="form-label" htmlFor="loginName">Nombre</label>
-                                    <input type="text" id="loginName" className="form-control" value={nombre} onChange={handleNombreChange} />
+                                    <input type="text" id="loginName" className="form-control" value={nombre} onChange={handleNombreChange} placeholder='Nombre'/>
 
                                 </div>
 
                                 {/* Campo de apellido */}
                                 <div className="form-outline mb-4">
-                                    <label className="form-label" htmlFor="loginName">Apellido</label>
-                                    <input type="text" id="loginName" className="form-control" value={apellido} onChange={handleApellidoChange} />
+
+                                    <input type="text" id="loginName" className="form-control" value={apellido} onChange={handleApellidoChange} placeholder='Apellido'/>
 
                                 </div>
 
                                 {/* Campo de email */}
                                 <div className="form-outline mb-4">
-                                    <label className="form-label" htmlFor="loginName">Email</label>
-                                    <input type="email" id="loginName" className="form-control" value={email} onChange={handleEmailChange} />
+
+                                    <input type="email" id="loginName" className="form-control" value={email} onChange={handleEmailChange} placeholder='Email'/>
 
                                 </div>
 
                                 {/* Campo de contraseña */}
                                 <div className="form-outline mb-4">
-                                    <label className="form-label" htmlFor="loginPassword">Password</label>
-                                    <input type="password" id="loginPassword" className="form-control" value={password} onChange={handlePasswordChange} />
+
+                                    <input type="password" id="loginPassword" className="form-control" value={password} onChange={handlePasswordChange} placeholder='Password'/>
 
                                 </div>
 
@@ -127,7 +126,7 @@ const Register = () => {
                                 <div className="row mb-4">
                                     <div className="col-md-6 d-flex justify-content-center">
                                         <div className="form-check mb-3 mb-md-0">
-                                            <input className="form-check-input" type="checkbox" value="" id="loginCheck" checked />
+                                            <input className="form-check-input" type="checkbox" value="" id="loginCheck"  />
                                             <label className="form-check-label" htmlFor="loginCheck"> Remember me </label>
                                         </div>
                                     </div>

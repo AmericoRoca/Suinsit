@@ -1,5 +1,16 @@
 /* Hoja de estilos del App.js */
 
+
+/* Definir una nueva fuente */
+@font-face {
+    font-family: 'Lato';
+    src: url('./Assets/Fonts/Lato-Black.ttf');
+}
+
+h1{
+    font-family: 'Lato';
+}
+
 .container-fluid {
     width: 100%;
     height: 100%;
@@ -14,7 +25,7 @@
 /* Estilo para ambos componentes */
 .general {
     border-radius: 10px;
-    background-color: #266787;
+    background-color: #FFD529;
     width: 100%;
     height: 100%; /* Ajusta la altura según sea necesario */
     margin-bottom: 5px;

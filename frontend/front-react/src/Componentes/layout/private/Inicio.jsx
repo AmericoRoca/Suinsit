@@ -15,6 +15,7 @@ export const Inicio = ({ routes }) => {
   return (
     <section className='inicio'>
       <div className='container-fluid'>
+        <div className='inicio-cont'>
         <div className='cont'>
           <FontAwesomeIcon icon={faUser} className='icon-house'></FontAwesomeIcon>
           {/* Mostrar el nombre del usuario si está definido */}
@@ -31,8 +32,9 @@ export const Inicio = ({ routes }) => {
         <div className='cont'>
           <FontAwesomeIcon icon={faRightFromBracket} className='icon-house'></FontAwesomeIcon>
           <NavLink to='app/logout' className='buscar-inicio'>
-            <span>Cerrar sesion</span>
+            <span>Cerrar sesión</span>
           </NavLink>
+        </div>
         </div>
       </div>
     </section>

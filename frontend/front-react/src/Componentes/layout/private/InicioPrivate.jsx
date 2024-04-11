@@ -3,7 +3,6 @@ import { Outlet, Navigate } from 'react-router-dom';
 import Inicio from '../private/Inicio';
 import BarraNavegacion from '../private/BarraNavegacion';
 import Footer1 from '../private/Footer1';
-import Footer2 from '../private/Footer2';
 import LeftArrow from '../private/LeftArrow';
 import RigthArrow from '../private/RigthArrow';
 import '../../../Assets/css/Components/layout/private/InicioPrivate.css';
@@ -12,8 +11,6 @@ import useAuth from '../../../hooks/useAuth';
 const InicioPrivate = () => {
 
   const { auth }  = useAuth();
-
-  console.log("Estamos aqui:" +auth.id);
 
 
   return (
@@ -37,11 +34,8 @@ const InicioPrivate = () => {
               <Outlet />
             </div>
           </div>
-          <div className='row'>
+          <div className='col-md-12'>
             <Footer1 />
-          </div>
-          <div className='row'>
-            <Footer2 />
           </div>
         </div>
         :  <Navigate to="/login"/>}

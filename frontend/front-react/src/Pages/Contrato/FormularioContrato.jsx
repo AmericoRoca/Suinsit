@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import { guardarDatos } from '../../Services/ContratoService';
+import '../../Assets/css/Pages/Contrato/FormularioContrato.css'
 
 export const FormularioContrato = ({fetchData, setData, setError}) => {
     const [fecha, setFecha] = useState('');

@@ -1,14 +1,10 @@
-.contendor {
-    background-color: #139FD4;
-}
 
 .title-contrato {
-    color: white;
+    color: rgb(0, 0, 0);
     margin-left: 40px;
 }
 
 .tabla-contratos {
-    border: 5px solid #266787;
     width: 90%;
     margin-top: 20px;
     height: 150px;
@@ -24,11 +20,17 @@
     border-radius: 10px;
     margin-right: 10px;
     width: 50px;
+    background-color: white;
+    border: none;
+}
+
+.icon-book{
+    color: #000;
 }
 
 .icon-crud {
     font-size: 20px;
-    color: white;
+    color: black;
 }
 
 .cuadro-form {
@@ -36,10 +38,9 @@
     background-color: white;
     border-radius: 50px;
     width: 30%;
-    height: 300px;
+    height: 100px;
     margin-left: 50px;
     margin-bottom: 50px;
-    border: 5px solid #266787;
 }
 
 .form-control {
@@ -50,7 +51,6 @@
 
 .cuadro-contrato {
     margin-top: 20px;
-    border: 5px solid #139FD4;
     width: 95%;
     background-color: white;
     height: 100px;
@@ -64,7 +64,7 @@
 }
 
 .cuadro-li-back {
-    background-color: #266787;
+    background-color: #000000;
     border-radius: 50px;
 }
 
@@ -84,7 +84,7 @@
     display: inline;
     margin-right: 50px;
     margin-left: 50px;
-    color: #266787;
+    color: #000000;
 }
 
 .button-crud-eliminar{

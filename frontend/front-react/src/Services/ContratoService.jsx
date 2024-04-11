@@ -49,27 +49,26 @@ export const guardarDatos = async (fecha, empresa, tipo) => {
     // Realiza la solicitud al API
     await fetchDataFromAPI(baseURL, options);
 
-    // Retorna true para indicar que la solicitud fue exitosa
+ 
     return true;
   } catch (error) {
-    // Captura y maneja cualquier error que ocurra durante la solicitud
+
     throw error;
   }
 };
 
+
+//Metodo para el borrado de contratos
 export const deleteContrato = async (id) => {
   try {
-    console.log('Iniciando solicitud de eliminación del contrato con ID:', id);
     const response = await fetchDataFromAPI(`${baseURL}/${id}`, { method: 'DELETE' });
-    console.log('Respuesta del servidor:', response);
 
-    // Verifica si la propiedad ok está presente en la respuesta
+
     if ('ok' in response && !response.ok) {
       const errorMessage = await response.json();
       throw new Error(errorMessage.error);
     }
 
-    // No es necesario lanzar una excepción aquí si la eliminación fue exitosa
     return null;
   } catch (error) {
     // Manejar cualquier error que ocurra durante la eliminación del contrato
@@ -77,6 +76,8 @@ export const deleteContrato = async (id) => {
   }
 };
 
+
+//Metodo para modificar los datos
 export const guardarDatosModificados = async (id, empresa, fecha, tipo) => {
   try {
     const response = await fetchDataFromAPI(`${baseURL}/${id}`, {

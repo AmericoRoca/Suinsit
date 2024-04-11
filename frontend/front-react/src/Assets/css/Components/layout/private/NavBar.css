@@ -7,15 +7,15 @@
     width: 150px;
     height: 150px;
     border-radius: 10px;
-    background-color:#139fd4;
+    background-color:#FFD529;
     justify-items: center;
     margin-bottom: 10px;
     margin-left: 20px;
 }
 .icon{
-    font-size: 80px;
+    font-size: 20px;
     margin-top: 20px;
-    color: white;
+    color: black;
     margin-bottom: 10px;
     align-items: center;
 }
@@ -26,7 +26,7 @@
 }
 
 .link-menu{
-    color: white;
+    color: black;
     text-decoration: none;
     display: block;
     text-align: center;
