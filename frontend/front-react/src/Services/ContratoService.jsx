@@ -57,15 +57,18 @@ export const guardarDatos = async (fecha, empresa, tipo) => {
   }
 };
 
-
-// Función para eliminar un contrato en el cliente
 export const deleteContrato = async (id) => {
   try {
+    console.log('Iniciando solicitud de eliminación del contrato con ID:', id);
     const response = await fetchDataFromAPI(`${baseURL}/${id}`, { method: 'DELETE' });
-    if (!response.ok) {
+    console.log('Respuesta del servidor:', response);
+
+    // Verifica si la propiedad ok está presente en la respuesta
+    if ('ok' in response && !response.ok) {
       const errorMessage = await response.json();
       throw new Error(errorMessage.error);
     }
+
     // No es necesario lanzar una excepción aquí si la eliminación fue exitosa
     return null;
   } catch (error) {
@@ -73,6 +76,8 @@ export const deleteContrato = async (id) => {
     throw new Error('Error al eliminar el contrato. Por favor, inténtelo de nuevo más tarde.');
   }
 };
+
+
 
 
 // Función para guardar los cambios al editar un contrato

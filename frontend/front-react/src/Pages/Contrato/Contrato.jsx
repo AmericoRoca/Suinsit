@@ -4,9 +4,10 @@ import { faPlus, faPen, faTrash, faFloppyDisk } from '@fortawesome/free-solid-sv
 import '../../Assets/css/Pages/Contrato/Contrato.css';
 import Crud from '../../Componentes/layout/private/Crud';
 import { FormularioContrato } from './FormularioContrato';
-import { fetchData, guardarDatos, deleteContrato } from '../../Services/ContratoService';
+import { fetchData, guardarDatos, deleteContrato, fetchDataFromAPI } from '../../Services/ContratoService';
 
 export const Contrato = () => {
+
   const [data, setData] = useState(null);
   const [añadir, setAñadir] = useState(false);
   const [fecha, setFecha] = useState('');
@@ -31,6 +32,29 @@ export const Contrato = () => {
     setEditandoIndex(null);
   };
 
+
+  const handleEliminarContrato = async (id) => {
+    try {
+      console.log('Iniciando eliminación del contrato con ID:', id);
+      await deleteContrato(id);
+      console.log('Contrato eliminado con éxito');
+      // Llamar a fetchData manualmente para actualizar la lista de contratos después de la eliminación
+      console.log('Actualizando lista de contratos...');
+      const newData = await fetchData();
+      console.log('Nuevos datos después de la eliminación:', newData);
+      setData(newData);
+      setError(null); // Limpiar cualquier error anterior si la eliminación tiene éxito
+    } catch (error) {
+      console.error('Error al eliminar el contrato:', error);
+      // Si hay un error al eliminar el contrato, mostrar el mensaje de error pero mantener los datos existentes
+      setError('Error al eliminar el contrato. Por favor, inténtelo de nuevo más tarde.');
+    }
+  };
+  
+  
+  
+  
+
   return (
     <div className='container-fluid container-cuadro'>
       <Crud
@@ -45,13 +69,16 @@ export const Contrato = () => {
 
       {añadir && (
         <FormularioContrato
-          fecha={fecha}
-          setFecha={setFecha}
-          empresa={empresa}
-          setEmpresa={setEmpresa}
-          tipo={tipo}
-          setTipo={setTipo}
-          guardarDatos={guardarDatos}
+        echa={fecha}
+        setFecha={setFecha}
+        empresa={empresa}
+        setEmpresa={setEmpresa}
+        tipo={tipo}
+        setTipo={setTipo}
+        guardarDatos={guardarDatos}
+        fetchData={fetchData}
+        setData={setData}
+        setError={setError}
         />
       )}
 
@@ -65,11 +92,15 @@ export const Contrato = () => {
               <li className="list-group-item cuadro-li">Empresa</li>
               <li className="list-group-item cuadro-li">Fecha</li>
               <li className="list-group-item cuadro-li">Tipo</li>
+
+              
+
               {eliminar && (
-                <button className='btn btn-danger button-crud-eliminar' onClick={() => deleteContrato(contrato.id)}>
+                <button className='btn btn-danger button-crud-eliminar' onClick={() => handleEliminarContrato(contrato.id)}>
                   <FontAwesomeIcon icon={faTrash} className='icon-crud' />
                 </button>
               )}
+
               {editar && (
                 <>
                   <button className='btn btn-warning button-crud-eliminar' onClick={() => handleEditar(index)}>
@@ -80,11 +111,14 @@ export const Contrato = () => {
                   </button>
                 </>
               )}
+
             </ul>
           </div>
+
           <div className='row cuadro-li-back2'>
             <ul className='fila-dato'>
               <li className="list-group-item cuadro-li2">{contrato.id}</li>
+
               {editandoIndex === index ? (
                 <li className="list-group-item cuadro-li2">
                   <input
@@ -96,6 +130,7 @@ export const Contrato = () => {
               ) : (
                 <li className="list-group-item cuadro-li2">{contrato.empresa}</li>
               )}
+
               {editandoIndex === index ? (
                 <li className="list-group-item cuadro-li2">
                   <input
@@ -107,6 +142,7 @@ export const Contrato = () => {
               ) : (
                 <li className="list-group-item cuadro-li2">{contrato.fechaFormateada}</li>
               )}
+
               {editandoIndex === index ? (
                 <li className="list-group-item cuadro-li2">
                   <input

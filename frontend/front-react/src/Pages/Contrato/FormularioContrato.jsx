@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import moment from 'moment'; 
-import { guardarDatos } from '../../Services/ContratoService'; 
+import moment from 'moment';
+import { guardarDatos } from '../../Services/ContratoService';
 
-export const FormularioContrato = () => {
+export const FormularioContrato = ({fetchData, setData, setError}) => {
     const [fecha, setFecha] = useState('');
     const [empresa, setEmpresa] = useState('');
     const [tipo, setTipo] = useState('');
@@ -41,33 +41,42 @@ export const FormularioContrato = () => {
                 setTipo('');
                 setErrores({});
             })
+
+        // Actualizar la lista de contratos después de guardar un nuevo contrato
+        console.log('Actualizando lista de contratos...');
+        fetchData()
+            .then(newData => {
+                // Actualizar el estado con los nuevos datos
+                setData(newData);
+                setError(null); // Limpiar cualquier error anterior si la actualización tiene éxito
+            })
             .catch(error => {
-                // Manejar errores de la solicitud al servidor
-                setErrores({ general: 'Hubo un error al guardar el contrato. Por favor, inténtalo de nuevo más tarde.' });
+                // Manejar errores de la solicitud al servidor al obtener los nuevos datos
+                console.error('Error al actualizar la lista de contratos:', error);
             });
     };
 
-    return (
-        <form className='cuadro-form' onSubmit={handleSubmit}>
-            <div className='form-añadir'>
-                <br />
-                <div className="mb-3">
-                    <input type="date" className="form-control" id="fecha" required value={fecha} onChange={(e) => setFecha(e.target.value)} />
-                    {errores.fecha && <div className="text-danger">{errores.fecha}</div>}
-                </div>
-                <div className="mb-3">
-                    <input type="text" className="form-control" id="empresa" placeholder='Empresa *' required value={empresa} onChange={(e) => setEmpresa(e.target.value)} />
-                    {errores.empresa && <div className="text-danger">{errores.empresa}</div>}
-                </div>
-                <div className="mb-3">
-                    <input type="text" className="form-control" id="tipo" placeholder='Tipo contrato *' required value={tipo} onChange={(e) => setTipo(e.target.value)} />
-                    {errores.tipo && <div className="text-danger">{errores.tipo}</div>}
-                </div>
-                <div className="form col-md-12">
-                    <button type="submit" className="btn btn-primary btn-submit-añadir">Submit</button>
-                </div>
-                {errores.general && <div className="alert alert-danger">{errores.general}</div>}
+return (
+    <form className='cuadro-form' onSubmit={handleSubmit}>
+        <div className='form-añadir'>
+            <br />
+            <div className="mb-3">
+                <input type="date" className="form-control" id="fecha" required value={fecha} onChange={(e) => setFecha(e.target.value)} />
+                {errores.fecha && <div className="text-danger">{errores.fecha}</div>}
             </div>
-        </form>
-    );
+            <div className="mb-3">
+                <input type="text" className="form-control" id="empresa" placeholder='Empresa *' required value={empresa} onChange={(e) => setEmpresa(e.target.value)} />
+                {errores.empresa && <div className="text-danger">{errores.empresa}</div>}
+            </div>
+            <div className="mb-3">
+                <input type="text" className="form-control" id="tipo" placeholder='Tipo contrato *' required value={tipo} onChange={(e) => setTipo(e.target.value)} />
+                {errores.tipo && <div className="text-danger">{errores.tipo}</div>}
+            </div>
+            <div className="form col-md-12">
+                <button type="submit" className="btn btn-primary btn-submit-añadir">Submit</button>
+            </div>
+            {errores.general && <div className="alert alert-danger">{errores.general}</div>}
+        </div>
+    </form>
+);
 };
