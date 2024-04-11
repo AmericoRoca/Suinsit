@@ -18,6 +18,7 @@ export const Contrato = () => {
   const [editar, setEditar] = useState(false);
   const [editandoIndex, setEditandoIndex] = useState(null);
 
+
   useEffect(() => {
     fetchData()
       .then(data => setData(data))
@@ -26,33 +27,35 @@ export const Contrato = () => {
 
   const handleEditar = (index) => {
     setEditandoIndex(index);
+
+    const contrato = data[index]; // Obtener el contrato actual
+    setEmpresa(contrato.empresa); // Establecer el valor de empresa
+    setFecha(contrato.fechaFormateada); // Establecer el valor de fecha
+    setTipo(contrato.tipo); // Establecer el valor de tipo
   };
 
   const handleGuardarCambios = async (id) => {
     try {
       console.log('Guardando cambios del contrato con ID:', id);
-      
-      // Guardar los datos modificados
+  
       await guardarDatosModificados(id, empresa, fecha, tipo);
   
       console.log('Datos del contrato actualizados con éxito');
-    
-      // Actualizar la lista de contratos después de guardar los cambios
+  
       console.log('Actualizando lista de contratos...');
       const newData = await fetchData();
       console.log('Nuevos datos después de la actualización:', newData);
-      
-      // Actualizar el estado después de obtener los nuevos datos
       setData(newData);
-      setError(null); // Limpiar cualquier error anterior si la actualización tiene éxito
-      handleEditar(false)
+      setError(null);
+      setEditandoIndex(-1); // Salir del modo de edición
     } catch (error) {
       console.error('Error al guardar los cambios del contrato:', error);
       setError('Error al guardar los cambios del contrato. Por favor, inténtelo de nuevo más tarde.');
     }
   };
   
-  
+
+
   const handleEliminarContrato = async (id) => {
     try {
       console.log('Iniciando eliminación del contrato con ID:', id);
@@ -147,7 +150,7 @@ export const Contrato = () => {
                     onChange={(e) => setEmpresa(e.target.value)}
                   />
                 ) : (
-                  contrato.empresa
+                  editandoIndex === index ? empresa : contrato.empresa
                 )}
               </li>
 
@@ -159,7 +162,7 @@ export const Contrato = () => {
                     onChange={(e) => setFecha(e.target.value)}
                   />
                 ) : (
-                  contrato.fechaFormateada
+                  editandoIndex === index ? fecha : contrato.fechaFormateada
                 )}
               </li>
 
@@ -171,7 +174,7 @@ export const Contrato = () => {
                     onChange={(e) => setTipo(e.target.value)}
                   />
                 ) : (
-                  contrato.tipo
+                  editandoIndex === index ? tipo : contrato.tipo
                 )}
               </li>
             </ul>
