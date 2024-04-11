@@ -77,22 +77,28 @@ export const deleteContrato = async (id) => {
   }
 };
 
-
-
-
-// Función para guardar los cambios al editar un contrato
-export const guardarCambios = async (editandoContrato) => {
+export const guardarDatosModificados = async (id, empresa, fecha, tipo) => {
   try {
-    const options = {
+    const response = await fetchDataFromAPI(`${baseURL}/${id}`, {
       method: 'PUT',
+      body: JSON.stringify({ empresa, fecha, tipo }),
       headers: {
         'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(editandoContrato)
-    };
-    await fetchDataFromAPI(`${baseURL}/${editandoContrato.id}`, options);
+      }
+    });
+
+      // Verifica si la respuesta indica un error
+      if ('ok' in response && !response.ok) {
+        const errorMessage = await response.json();
+        throw new Error(errorMessage.error);
+
+      }
+
+    // Devuelve true si los datos se guardaron correctamente
     return true;
   } catch (error) {
-    throw error;
+    console.error('Error al guardar los datos modificados del contrato:', error);
+    throw new Error('Error al guardar los datos modificados del contrato. Por favor, inténtelo de nuevo más tarde.');
   }
 };
+

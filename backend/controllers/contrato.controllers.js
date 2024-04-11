@@ -39,20 +39,23 @@ const createContratos = async (req, res) => {
 
 const updateContratos = async (req, res) => {
     const id = req.params.id;
-    const { numero, empresa } = req.body;
+    const { fecha, empresa, tipo } = req.body;
 
     try {
         const contrato = await Contrato.findByPk(id);
         if (!contrato) {
             return res.status(404).json({ message: 'Contrato no encontrado' });
         }
-        await contrato.update({ numero, empresa });
+        await contrato.update({ fecha, empresa, tipo });
+        // Agregar un registro para imprimir la respuesta antes de enviarla
+        console.log('Respuesta del servidor:', contrato);
         res.status(200).json(contrato);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error al editar el contrato' });
     }
 }
+
 
 const deleteContratos = async (req, res) => {
     const id = req.params.id;
