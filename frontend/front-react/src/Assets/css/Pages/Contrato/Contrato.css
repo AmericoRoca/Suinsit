@@ -21,8 +21,13 @@
     margin-right: 10px;
     width: 50px;
     background-color: white;
-    border: none;
+    border-color: black ;
 }
+
+.button-crud:hover {
+    border-color: black ;
+}
+
 
 .icon-book{
     color: #000;

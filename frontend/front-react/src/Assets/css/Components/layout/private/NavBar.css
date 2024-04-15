@@ -11,9 +11,26 @@
     justify-items: center;
     margin-bottom: 10px;
     margin-left: 20px;
+    margin-right: 20px;
+}
+
+.cuadro:hover {
+    /* Establecer la escala inicial */
+    transform: scale(1);
+    /* Animación */
+    animation: escala 1s infinite alternate;
+}
+
+@keyframes escala {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
 }
 .icon{
-    font-size: 20px;
+    font-size: 100px;
     margin-top: 20px;
     color: black;
     margin-bottom: 10px;

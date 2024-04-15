@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types'; // Importa PropTypes para validar las props
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Importa FontAwesomeIcon para los iconos
-import { faBook } from '@fortawesome/free-solid-svg-icons';
-import '../../../Assets/css/Components//layout/private/Crud.css'; // Importa el archivo de estilos CSS
+import { faBook, } from '@fortawesome/free-solid-svg-icons';
+import '../../../Assets/css/Components/layout/private/Crud.css'; // Importa el archivo de estilos CSS
 
 const Crud = ({ // Define el componente Crud como una función de flecha que recibe props
   title,
@@ -11,11 +11,12 @@ const Crud = ({ // Define el componente Crud como una función de flecha que rec
   addButtonIcon, // Icono para el botón de añadir
   toggleEliminar, // Función para mostrar/ocultar el formulario de eliminar
   editButtonIcon, // Icono para el botón de editar
-  deleteButtonIcon // Icono para el botón de eliminar
+  deleteButtonIcon, // Icono para el botón de eliminar
+  icon
 }) => {
   return (
     <div className='container-fluid container-cuadro'> {/* Contenedor principal */}
-      <FontAwesomeIcon icon={faBook} className='icon-book' /> {/* Icono opcional */}
+      <FontAwesomeIcon icon={icon} className='icon-book' /> {/* Icono opcional */}
       <h1 className='title-contrato'>{title}</h1> {/* Título */}
       <div className='row crud'> {/* Contenedor de botones */}
         {/* Botón de añadir con icono */}

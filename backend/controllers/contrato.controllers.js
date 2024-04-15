@@ -73,6 +73,16 @@ const deleteContratos = async (req, res) => {
     }
 }
 
+const uploadFile = async (req,res) =>{
+    const id = req.params.id;
+
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
 module.exports = {
     getContratos,
     createContratos,
