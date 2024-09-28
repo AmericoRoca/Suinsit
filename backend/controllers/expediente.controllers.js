@@ -1,9 +1,10 @@
-const pool = require('../database/connect');
+const Expediente = require('../models/expediente.model');  // Importamos el modelo Expediente
 
 const getExpedientes = async (req, res) => {
     try {
-        const response = await pool.query("SELECT * FROM public.expediente");
-        res.status(200).json(response.rows);
+        // Obtener todos los expedientes
+        const expedientes = await Expediente.findAll();
+        res.status(200).json(expedientes);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error al obtener expedientes' });
@@ -13,8 +14,12 @@ const getExpedientes = async (req, res) => {
 const getExpedientesById = async (req, res) => {
     const id = req.params.id;
     try {
-        const response = await pool.query('SELECT * FROM public.expediente WHERE codigo = $1', [id]);
-        res.status(200).json(response.rows);
+        // Obtener expediente por ID
+        const expediente = await Expediente.findByPk(id);
+        if (!expediente) {
+            return res.status(404).json({ message: 'Expediente no encontrado' });
+        }
+        res.status(200).json(expediente);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error al obtener expediente por ID' });
@@ -25,42 +30,64 @@ const createExpedientes = async (req, res) => {
     const { numero, empresa, color, coche } = req.body;
 
     try {
-        const response = await pool.query('INSERT INTO public.expediente (codigo, numero, empresa, color, coche) VALUES (DEFAULT, $1, $2, $3, $4) RETURNING *', [numero, empresa, color, coche]);
-        res.status(201).json(response.rows[0]);
+        // Crear nuevo expediente
+        const nuevoExpediente = await Expediente.create({
+            numero,
+            empresa,
+            color,
+            coche
+        });
+        res.status(201).json(nuevoExpediente);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error al crear expediente' });
     }
 }
 
-const updateExpedientes = async (req,res) => {
-    const id =req.params.id;
-    const { numero, empresa} = req.body;
+const updateExpedientes = async (req, res) => {
+    const id = req.params.id;
+    const { numero, empresa } = req.body;
 
     console.log(id, numero, empresa);
 
     try {
-        const response = await pool.query('UPDATE  public.expediente SET numero= $1, empresa=$2 WHERE codigo = $3', [numero, empresa, id]);
-        res.status(201).json(response.rows[0]);
+        // Buscar el expediente y luego actualizar
+        const expediente = await Expediente.findByPk(id);
+        if (!expediente) {
+            return res.status(404).json({ message: 'Expediente no encontrado' });
+        }
+
+        // Actualizar campos
+        expediente.numero = numero;
+        expediente.empresa = empresa;
+
+        // Guardar los cambios
+        await expediente.save();
+
+        res.status(200).json(expediente);
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error al editar el expediente' });
     }
 }
 
-
 const deleteExpedientes = async (req, res) => {
-    const id =req.params.id;
+    const id = req.params.id;
 
     try {
-        const response = await pool.query('DELETE FROM public.expediente WHERE codigo = $1', [id]);
-        res.status(201).json(response.rows[0]);
+        // Buscar el expediente y luego eliminar
+        const expediente = await Expediente.findByPk(id);
+        if (!expediente) {
+            return res.status(404).json({ message: 'Expediente no encontrado' });
+        }
+
+        await expediente.destroy();  // Eliminar expediente
+        res.status(200).json({ message: 'Expediente eliminado correctamente' });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Error al borrar el expediente' });
     }
 }
-
 
 module.exports = {
     getExpedientes,
@@ -68,4 +95,4 @@ module.exports = {
     getExpedientesById,
     deleteExpedientes,
     updateExpedientes
-}
+};

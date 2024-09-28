@@ -6,6 +6,7 @@ import '../Assets/css/Components/NavBar.css';
 // Import FontAwesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
+import { faFile } from '@fortawesome/free-solid-svg-icons';
 import { faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 import { faPhone } from '@fortawesome/free-solid-svg-icons';
 import { faBriefcase } from '@fortawesome/free-solid-svg-icons';
@@ -30,7 +31,7 @@ export const BarraNavegacion = () => {
                         <Cuadro to="/contrato" icon={faBook} text="Contrato" />
                     </div>
                     <div className='col-md-2'>
-                        <Cuadro to="/studio" icon={faBook} text="Studio" />
+                        <Cuadro to="/studio" icon={faFile} text="Archivos" />
                     </div>
                     <div className='col-md-2'>
                         <Cuadro to="/ventas" icon={faMoneyBill} text="Ventas" />

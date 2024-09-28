@@ -1,88 +1,48 @@
-import React from 'react'
+import React, { useState } from 'react';
 
 export const Login = () => {
-    return (
-        <div>Login</div>
-        /*
-        <div className="form">
+  // Definimos el estado para los campos de email y password
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-            <ul className="tab-group">
-                <li className="tab active"><a href="#signup">Sign Up</a></li>
-                <li className="tab"><a href="#login">Log In</a></li>
-            </ul>
+  // Función que maneja el envío del formulario
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Evita que la página se recargue
+    console.log('Email:', email);
+    console.log('Password:', password);
 
-            <div className="tab-content">
-                <div id="signup">
-                    <h1>Sign Up for Free</h1>
+    // Aquí puedes agregar la lógica para autenticar el usuario con tu backend
+    alert(`Email: ${email}, Password: ${password}`); // Muestra una alerta con los datos
+  };
 
-                    <form action="/" method="post">
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', width: '300px' }}>
+        <h2>Login</h2>
 
-                        <div className="top-row">
-                            <div className="field-wrap">
-                                <label>
-                                    First Name<span classNameName="req">*</span>
-                                </label>
-                                <input type="text" required autocomplete="off" />
-                            </div>
+        <label>Email:</label>
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}  // Actualiza el estado del email
+          required
+          style={{ padding: '8px', marginBottom: '10px' }}
+        />
 
-                            <div className="field-wrap">
-                                <label>
-                                    Last Name<span className="req">*</span>
-                                </label>
-                                <input type="text" required autocomplete="off" />
-                            </div>
-                        </div>
+        <label>Password:</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}  // Actualiza el estado del password
+          required
+          style={{ padding: '8px', marginBottom: '20px' }}
+        />
 
-                        <div className="field-wrap">
-                            <label>
-                                Email Address<span className="req">*</span>
-                            </label>
-                            <input type="email" required autocomplete="off" />
-                        </div>
-
-                        <div className="field-wrap">
-                            <label>
-                                Set A Password<span className="req">*</span>
-                            </label>
-                            <input type="password" required autocomplete="off" />
-                        </div>
-
-                        <button type="submit" className="button button-block" >Get Started</button>
-
-                    </form>
-
-            </div>
-
-            <div id="login">
-                <h1>Welcome Back!</h1>
-
-                <form action="/" method="post">
-
-                    <div className="field-wrap">
-                        <label>
-                            Email Address<span className="req">*</span>
-                        </label>
-                        <input type="email" required autocomplete="off" />
-                    </div>
-
-                    <div className="field-wrap">
-                        <label>
-                            Password<span className="req">*</span>
-                        </label>
-                        <input type="password" required autocomplete="off" />
-                    </div>
-
-                    <p className="forgot"><a href="#">Forgot Password?</a></p>
-
-                    <button className="button button-block" >Log In</button>
-
-                </form>
-
-            </div>
-        
-        </div >
-      
-        </div >
-        */
-  )
-}
+        <button type="submit" style={{ padding: '10px', background: '#007bff', color: 'white', border: 'none', cursor: 'pointer' }}>
+          Iniciar sesión
+        </button>
+        <span> Si no tienes cuenta, haz <a href=''>click aqui</a> para crear una</span>
+      </form>
+    </div>
+  );
+};
